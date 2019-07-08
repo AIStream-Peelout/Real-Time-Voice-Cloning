@@ -19,6 +19,13 @@ recognized_datasets = [
     "LibriSpeech/train-clean-100",
     "LibriSpeech/train-clean-360",
     "LibriSpeech/train-other-500",
+    "LibriTTS/dev-clean",
+    "LibriTTS/dev-other",
+    "LibriTTS/test-clean",
+    "LibriTTS/test-other",
+    "LibriTTS/train-clean-100",
+    "LibriTTS/train-clean-360",
+    "LibriTTS/train-other-500",
     "LJSpeech-1.1",
     "VoxCeleb1/wav",
     "VoxCeleb1/test_wav",
@@ -132,7 +139,7 @@ class Toolbox:
         # Compute the embedding
         if not encoder.is_loaded():
             self.init_encoder()
-        encoder_wav = encoder.load_preprocess_wav(wav)
+        encoder_wav = encoder.preprocess_wav(wav)
         embed, partial_embeds, _ = encoder.embed_utterance(encoder_wav, return_partials=True)
 
         # Add the utterance
@@ -208,7 +215,7 @@ class Toolbox:
         # TODO: this is problematic with different sampling rates, gotta fix it
         if not encoder.is_loaded():
             self.init_encoder()
-        encoder_wav = encoder.load_preprocess_wav(wav)
+        encoder_wav = encoder.preprocess_wav(wav)
         embed, partial_embeds, _ = encoder.embed_utterance(encoder_wav, return_partials=True)
         
         # Add the utterance
